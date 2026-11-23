@@ -13,3 +13,10 @@ export const removeProduct = (payload) => {
     payload,
   };
 };
+
+export const increaseProductQuantity = (payload) => {
+  return {
+    type: CartActionTypes.INCREASE_PRODUCT_QUANTITY,
+    payload,
+  };
+};
