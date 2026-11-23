@@ -20,3 +20,10 @@ export const increaseProductQuantity = (payload) => {
     payload,
   };
 };
+
+export const decreaseProductQuantity = (payload) => {
+  return {
+    type: CartActionTypes.DECREASE_PRODUCT_QUANTITY,
+    payload,
+  };
+};
