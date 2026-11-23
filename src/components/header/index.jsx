@@ -22,7 +22,9 @@ function Header() {
       <Styles.Logo>Redux Shopping</Styles.Logo>
       <Styles.Buttons>
         <div>Login</div>
-        <div onClick={handleCartClick}>Carrinho ({productsCount})</div>
+        <div onClick={handleCartClick}>
+          Carrinho {productsCount > 0 && `(${productsCount})`}
+        </div>
       </Styles.Buttons>
 
       <Cart isVisible={cartIsVisible} setIsVisible={setCartIsVisible} />
