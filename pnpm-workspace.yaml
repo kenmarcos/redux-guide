@@ -1,0 +1,7 @@
+allowBuilds:
+  core-js: true
+  core-js-pure: true
+publicHoistPattern:
+  - "*eslint*"
+overrides:
+  typescript: 4.9.5
