@@ -7,8 +7,6 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case CartActionTypes.ADD_PRODUCT:
-      console.log(action);
-
       const productIsAlreadyInCart = state.products.some(
         (product) => product.id === action.payload.id,
       );
@@ -31,6 +29,14 @@ const cartReducer = (state = initialState, action) => {
           }
           return product;
         }),
+      };
+
+    case CartActionTypes.REMOVE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter(
+          (product) => product.id !== action.payload,
+        ),
       };
 
     default:

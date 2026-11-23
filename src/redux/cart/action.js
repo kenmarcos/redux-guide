@@ -6,3 +6,10 @@ export const addProduct = (payload) => {
     payload,
   };
 };
+
+export const removeProduct = (payload) => {
+  return {
+    type: CartActionTypes.REMOVE_PRODUCT,
+    payload,
+  };
+};
