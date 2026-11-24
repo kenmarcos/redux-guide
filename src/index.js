@@ -2,14 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import ContextsProvider from "./contexts/contexts-provider";
+import ContextProviders from "./contexts/context-providers";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ContextsProvider>
+    <ContextProviders>
       <App />
-    </ContextsProvider>
+    </ContextProviders>
   </React.StrictMode>,
 );
 
