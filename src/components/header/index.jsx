@@ -5,12 +5,12 @@ import Cart from "../cart/index";
 
 // Styles
 import * as Styles from "./styles";
-import { useCartContext } from "../../contexts/cart-context";
+import { useCartState } from "../../contexts/cart/cart-context";
 
 function Header() {
   const [cartIsVisible, setCartIsVisible] = useState(false);
 
-  const { productCount: productsCount } = useCartContext();
+  const { productsCount } = useCartState();
 
   const handleCartClick = () => {
     setCartIsVisible(true);

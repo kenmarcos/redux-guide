@@ -5,15 +5,16 @@ import CustomButton from "../custom-button/index";
 
 // Styles
 import * as Styles from "./styles";
-import { useCartContext } from "../../contexts/cart-context";
+import { useCartDispatch } from "../../contexts/cart/cart-context";
+import { addProductAction } from "../../contexts/cart/cart-actions";
 
 // Utilities
 
 const ProductItem = ({ product }) => {
-  const { addProduct } = useCartContext();
+  const dispatch = useCartDispatch();
 
   const handleAddProduct = () => {
-    addProduct(product);
+    dispatch(addProductAction(product));
   };
 
   return (

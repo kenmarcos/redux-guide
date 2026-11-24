@@ -1,12 +1,12 @@
 // Styles
-import { useCartContext } from "../../contexts/cart-context";
+import { useCartState } from "../../contexts/cart/cart-context";
 import * as Styles from "./styles";
 import CartItem from "../../components/cart-item/index";
 
 const Cart = ({ isVisible, setIsVisible }) => {
   const handleEscapeAreaClick = () => setIsVisible(false);
 
-  const { products, productsTotalPrice } = useCartContext();
+  const { products, productsTotalPrice } = useCartState();
 
   return (
     <Styles.CartContainer isVisible={isVisible}>

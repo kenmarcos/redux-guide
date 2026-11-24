@@ -2,22 +2,26 @@ import { AiOutlinePlus, AiOutlineMinus, AiOutlineClose } from "react-icons/ai";
 
 // Styles
 import * as Styles from "./styles";
-import { useCartContext } from "../../contexts/cart-context";
+import { useCartDispatch } from "../../contexts/cart/cart-context";
+import {
+  decreaseProductQuantityAction,
+  increaseProductQuantityAction,
+  removeProductAction,
+} from "../../contexts/cart/cart-actions";
 
 const CartItem = ({ product }) => {
-  const { removeProduct, increaseProductQuantity, decreaseProductQuantity } =
-    useCartContext();
+  const dispatch = useCartDispatch();
 
   const handleRemoveClick = () => {
-    removeProduct(product.id);
+    dispatch(removeProductAction(product.id));
   };
 
   const handleIncreaseClick = () => {
-    increaseProductQuantity(product.id);
+    dispatch(increaseProductQuantityAction(product.id));
   };
 
   const handleDecreaseClick = () => {
-    decreaseProductQuantity(product.id);
+    dispatch(decreaseProductQuantityAction(product.id));
   };
 
   return (

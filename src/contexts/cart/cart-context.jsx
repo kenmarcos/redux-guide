@@ -1,9 +1,14 @@
-const { createContext, useContext, useState } = require("react");
+import { createContext, useContext, useReducer } from "react";
 
-const CartContext = createContext();
+import { cartInitialState, cartReducer } from "./cart-reducer";
+
+const CartStateContext = createContext(null);
+const CartDispatchContext = createContext(null);
 
 export const CartContextProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
+  const [state, dispatch] = useReducer(cartReducer, cartInitialState);
+
+  const { products } = state;
 
   const productsCount = products.reduce((acc, curr) => acc + curr.quantity, 0);
 
@@ -12,81 +17,37 @@ export const CartContextProvider = ({ children }) => {
     0,
   );
 
-  const addProduct = (payload) => {
-    const productIsAlreadyInCart = products.some(
-      (product) => product.id === payload.id,
-    );
-
-    if (!productIsAlreadyInCart) {
-      setProducts((prevProducts) => {
-        return [...prevProducts, { ...payload, quantity: 1 }];
-      });
-
-      return;
-    }
-
-    setProducts((prevProducts) =>
-      prevProducts.map((prevProduct) => {
-        if (prevProduct.id === payload.id) {
-          return { ...prevProduct, quantity: prevProduct.quantity + 1 };
-        }
-
-        return prevProduct;
-      }),
-    );
-  };
-
-  const removeProduct = (payload) => {
-    setProducts((prevProduct) =>
-      prevProduct.filter((product) => product.id !== payload),
-    );
-  };
-
-  const increaseProductQuantity = (payload) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((prevProduct) =>
-        prevProduct.id === payload
-          ? { ...prevProduct, quantity: prevProduct.quantity + 1 }
-          : prevProduct,
-      ),
-    );
-  };
-
-  const decreaseProductQuantity = (payload) => {
-    setProducts((prevProducts) =>
-      prevProducts
-        .map((prevProduct) =>
-          prevProduct.id === payload
-            ? { ...prevProduct, quantity: prevProduct.quantity - 1 }
-            : prevProduct,
-        )
-        .filter((prevProduct) => prevProduct.quantity > 0),
-    );
-  };
-
   return (
-    <CartContext.Provider
+    <CartStateContext.Provider
       value={{
         products,
         productsCount,
         productsTotalPrice,
-        addProduct,
-        removeProduct,
-        increaseProductQuantity,
-        decreaseProductQuantity,
       }}
     >
-      {children}
-    </CartContext.Provider>
+      <CartDispatchContext.Provider value={dispatch}>
+        {children}
+      </CartDispatchContext.Provider>
+    </CartStateContext.Provider>
   );
 };
 
-export const useCartContext = () => {
-  const cartContext = useContext(CartContext);
+export const useCartState = () => {
+  const cartContext = useContext(CartStateContext);
 
   if (!cartContext) {
-    throw new Error("Cart Context should be used within a Provider");
+    throw new Error("useCartState must be used within CartContextProvider");
   }
 
   return cartContext;
+};
+
+export const useCartDispatch = () => {
+  const context = useContext(CartDispatchContext);
+
+  if (!context) {
+    throw new Error("useCartDispatch must be used within CartContextProvider");
+  }
+
+  return context;
 };
