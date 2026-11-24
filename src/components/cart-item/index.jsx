@@ -2,7 +2,7 @@ import { AiOutlinePlus, AiOutlineMinus, AiOutlineClose } from "react-icons/ai";
 
 // Styles
 import * as Styles from "./styles";
-import { useCartContext } from "../../contexts/cart-context";
+import { useCartContext } from "../../contexts/cart/cart-context";
 
 const CartItem = ({ product }) => {
   const { removeProduct, increaseProductQuantity, decreaseProductQuantity } =

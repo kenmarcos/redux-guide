@@ -5,7 +5,7 @@ import CustomButton from "../custom-button/index";
 
 // Styles
 import * as Styles from "./styles";
-import { useCartContext } from "../../contexts/cart-context";
+import { useCartContext } from "../../contexts/cart/cart-context";
 
 // Utilities
 

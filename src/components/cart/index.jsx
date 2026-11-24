@@ -1,5 +1,5 @@
 // Styles
-import { useCartContext } from "../../contexts/cart-context";
+import { useCartContext } from "../../contexts/cart/cart-context";
 import * as Styles from "./styles";
 import CartItem from "../../components/cart-item/index";
 
